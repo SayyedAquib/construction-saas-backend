@@ -4,11 +4,9 @@ import bcrypt from "bcrypt";
 
 const userShema = new Schema(
   {
-    username: {
+    name: {
       type: String,
       required: true,
-      unique: true,
-      lowercase: true,
       trim: true,
       index: true,
     },
@@ -45,6 +43,7 @@ userShema.methods.generateAccessToken = function () {
   return jwt.sign(
     {
       _id: this._id,
+      name: this.name,
       email: this.email,
       username: this.username,
     },
